@@ -6,7 +6,7 @@
 
 #define WIFI_SSID "Password: x in (x^2 - 3x + 4)"
 #define WIFI_PASSWORD "bolta hu ruk"
-#define BACKEND_HOST "10.125.51.141"
+#define BACKEND_HOST "10.155.71.195"
 #define BACKEND_PORT 8000
 #define NODE_ID "NODE_01"
 
