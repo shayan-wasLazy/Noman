@@ -7,3 +7,7 @@
 backend/.env
 .pio/
 .vscode/
+venv/
+*.pyc
+__pycache__/
+include/env_config.h
