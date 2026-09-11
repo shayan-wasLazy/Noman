@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SIH26025 | Mine Monitoring</title>
+
+    <link rel="stylesheet" href="/static/style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+    <header class="topbar">
+
+        <div>
+            <div class="brand">SIH26025</div>
+            <div class="subtitle">Mine Monitoring System</div>
+        </div>
+
+        <div class="system-status">
+            <span id="systemDot" class="status-dot"></span>
+            <span id="systemStatus">Connecting...</span>
+        </div>
+
+    </header>
+
+
+    <main class="container">
+
+        <!-- Overview -->
+
+        <section class="overview">
+
+            <div class="overview-card">
+                <span class="label">TOTAL NODES</span>
+                <strong id="totalNodes">0</strong>
+            </div>
+
+            <div class="overview-card">
+                <span class="label">ONLINE</span>
+                <strong id="onlineNodes">0</strong>
+            </div>
+
+            <div class="overview-card">
+                <span class="label">OFFLINE</span>
+                <strong id="offlineNodes">0</strong>
+            </div>
+
+            <div class="overview-card">
+                <span class="label">LAST UPDATE</span>
+                <strong id="lastUpdate">--</strong>
+            </div>
+
+        </section>
+
+
+        <!-- Nodes -->
+
+        <section>
+
+            <div class="section-heading">
+                <div>
+                    <h2>Sensor Nodes</h2>
+                    <p>Real-time readings from deployed ESP32 nodes</p>
+                </div>
+            </div>
+
+            <div id="nodesContainer" class="nodes-grid">
+
+                <div class="empty-state">
+                    Waiting for sensor data...
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Charts -->
+
+        <section class="charts-section">
+
+            <div class="section-heading">
+                <div>
+                    <h2>Sensor History</h2>
+                    <p>Live vibration and acceleration trends</p>
+                </div>
+            </div>
+
+
+            <div class="chart-grid">
+
+                <div class="chart-card">
+
+                    <div class="chart-header">
+                        <h3>NODE_01</h3>
+                        <span id="node1ChartStatus">Waiting</span>
+                    </div>
+
+                    <div class="chart-wrapper">
+                        <canvas id="node1Chart"></canvas>
+                    </div>
+
+                </div>
+
+
+                <div class="chart-card">
+
+                    <div class="chart-header">
+                        <h3>NODE_02</h3>
+                        <span id="node2ChartStatus">Waiting</span>
+                    </div>
+
+                    <div class="chart-wrapper">
+                        <canvas id="node2Chart"></canvas>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+        SIH26025 · Mine Monitoring & Early Warning System
+    </footer>
+
+
+    <script src="/static/app.js"></script>
+
+</body>
+</html>
