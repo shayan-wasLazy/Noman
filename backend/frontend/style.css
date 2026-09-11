@@ -1,0 +1,340 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Inter, Arial, sans-serif;
+    background: #0b0f14;
+    color: #f1f5f9;
+    min-height: 100vh;
+}
+
+
+/* =========================
+   TOP BAR
+========================= */
+
+.topbar {
+    height: 78px;
+    padding: 0 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    border-bottom: 1px solid #202832;
+    background: #0d1218;
+}
+
+.brand {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.subtitle {
+    margin-top: 3px;
+    color: #7f8b99;
+    font-size: 13px;
+}
+
+.system-status {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    font-size: 13px;
+    color: #aeb8c4;
+}
+
+.status-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #777;
+}
+
+
+/* =========================
+   MAIN
+========================= */
+
+.container {
+    max-width: 1400px;
+    margin: auto;
+    padding: 35px 42px;
+}
+
+
+/* =========================
+   OVERVIEW
+========================= */
+
+.overview {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+
+    margin-bottom: 42px;
+}
+
+.overview-card {
+    background: #111820;
+    border: 1px solid #202a35;
+
+    border-radius: 12px;
+    padding: 22px;
+}
+
+.label {
+    display: block;
+
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+
+    color: #718096;
+
+    margin-bottom: 12px;
+}
+
+.overview-card strong {
+    font-size: 27px;
+}
+
+
+/* =========================
+   HEADINGS
+========================= */
+
+.section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 18px;
+}
+
+.section-heading h2 {
+    font-size: 20px;
+}
+
+.section-heading p {
+    margin-top: 5px;
+
+    font-size: 13px;
+    color: #738091;
+}
+
+
+/* =========================
+   NODE CARDS
+========================= */
+
+.nodes-grid {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 18px;
+
+    margin-bottom: 42px;
+}
+
+.node-card {
+    background: #111820;
+    border: 1px solid #202a35;
+
+    border-radius: 14px;
+
+    padding: 24px;
+}
+
+.node-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 22px;
+}
+
+.node-name {
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.node-state {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+
+    font-size: 12px;
+}
+
+.node-state-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.online {
+    background: #22c55e;
+}
+
+.offline {
+    background: #ef4444;
+}
+
+
+.readings {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 12px;
+}
+
+.reading {
+    background: #0b1016;
+
+    border: 1px solid #1d2731;
+
+    border-radius: 10px;
+
+    padding: 16px;
+}
+
+.reading-label {
+    font-size: 11px;
+    color: #6e7b8a;
+
+    margin-bottom: 7px;
+}
+
+.reading-value {
+    font-size: 23px;
+    font-weight: 700;
+}
+
+.reading-unit {
+    font-size: 11px;
+    color: #718096;
+}
+
+
+/* =========================
+   CHARTS
+========================= */
+
+.chart-grid {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 18px;
+}
+
+.chart-card {
+    background: #111820;
+
+    border: 1px solid #202a35;
+
+    border-radius: 14px;
+
+    padding: 20px;
+}
+
+.chart-header {
+    display: flex;
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 20px;
+}
+
+.chart-header h3 {
+    font-size: 14px;
+}
+
+.chart-header span {
+    font-size: 11px;
+    color: #738091;
+}
+
+.chart-wrapper {
+    height: 310px;
+}
+
+
+/* =========================
+   EMPTY
+========================= */
+
+.empty-state {
+    grid-column: 1 / -1;
+
+    padding: 50px;
+
+    text-align: center;
+
+    color: #697687;
+
+    border: 1px dashed #26313d;
+
+    border-radius: 12px;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    text-align: center;
+
+    padding: 30px;
+
+    color: #4f5b69;
+
+    font-size: 11px;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 900px) {
+
+    .overview {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .nodes-grid,
+    .chart-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .topbar {
+        padding: 0 20px;
+    }
+
+    .container {
+        padding: 25px 20px;
+    }
+
+    .overview {
+        grid-template-columns: 1fr;
+    }
+
+    .readings {
+        grid-template-columns: 1fr;
+    }
+
+}

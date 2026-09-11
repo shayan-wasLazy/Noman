@@ -1,7 +1,9 @@
-Import("env")
-
+from typing import Any
 from pathlib import Path
-import os
+
+# PlatformIO/SCons provides this at build time
+env: Any
+Import("env")  # type: ignore[name-defined]
 
 
 # =====================================
@@ -11,7 +13,6 @@ import os
 project_dir = Path(env.subst("$PROJECT_DIR"))
 env_file = project_dir / ".env"
 
-
 if not env_file.exists():
     raise RuntimeError(
         f".env file not found at: {env_file}"
@@ -19,7 +20,7 @@ if not env_file.exists():
 
 
 # =====================================
-# Load .env manually
+# Load .env
 # =====================================
 
 variables = {}
@@ -54,7 +55,6 @@ required = [
     "NODE_ID",
 ]
 
-
 for key in required:
     if key not in variables:
         raise RuntimeError(
@@ -63,18 +63,53 @@ for key in required:
 
 
 # =====================================
-# Inject variables into C++ compiler
+# Escape values for C++ strings
 # =====================================
 
-env.Append(
-    BUILD_FLAGS=[
-        f'-DWIFI_SSID=\\"{variables["WIFI_SSID"]}\\"',
-        f'-DWIFI_PASSWORD=\\"{variables["WIFI_PASSWORD"]}\\"',
-        f'-DBACKEND_HOST=\\"{variables["BACKEND_HOST"]}\\"',
-        f'-DBACKEND_PORT=\\"{variables["BACKEND_PORT"]}\\"',
-        f'-DNODE_ID=\\"{variables["NODE_ID"]}\\"',
-    ]
-)
+def cpp_escape(value):
+    return (
+        value
+        .replace("\\", "\\\\")
+        .replace('"', '\\"')
+        .replace("\n", "\\n")
+        .replace("\r", "\\r")
+    )
+
+
+# =====================================
+# Generate C++ configuration header
+# =====================================
+
+config_file = project_dir / "include" / "env_config.h"
+
+with open(config_file, "w") as file:
+    file.write("// AUTO-GENERATED FILE - DO NOT EDIT\n")
+    file.write("// Generated from .env by scripts/load_env.py\n\n")
+
+    file.write("#ifndef ENV_CONFIG_H\n")
+    file.write("#define ENV_CONFIG_H\n\n")
+
+    file.write(
+        f'#define WIFI_SSID "{cpp_escape(variables["WIFI_SSID"])}"\n'
+    )
+
+    file.write(
+        f'#define WIFI_PASSWORD "{cpp_escape(variables["WIFI_PASSWORD"])}"\n'
+    )
+
+    file.write(
+        f'#define BACKEND_HOST "{cpp_escape(variables["BACKEND_HOST"])}"\n'
+    )
+
+    file.write(
+        f'#define BACKEND_PORT {variables["BACKEND_PORT"]}\n'
+    )
+
+    file.write(
+        f'#define NODE_ID "{cpp_escape(variables["NODE_ID"])}"\n'
+    )
+
+    file.write("\n#endif\n")
 
 
 # =====================================
@@ -86,9 +121,11 @@ print("=====================================")
 print("ESP32 .env configuration loaded")
 print("=====================================")
 print(f"WIFI_SSID     : {variables['WIFI_SSID']}")
-print(f"WIFI_PASSWORD : ********")
+print("WIFI_PASSWORD : ********")
 print(f"BACKEND_HOST  : {variables['BACKEND_HOST']}")
 print(f"BACKEND_PORT  : {variables['BACKEND_PORT']}")
 print(f"NODE_ID       : {variables['NODE_ID']}")
+print("-------------------------------------")
+print(f"Generated     : {config_file}")
 print("=====================================")
 print("")
